@@ -25,4 +25,9 @@ public class RentalController {
     public List<Rental> getAllRentals() {
         return rentalService.getAllRentals();
     }
+
+    @GetMapping("/cheapest")
+    public Rental getCheapestRental() {
+        return rentalService.getCheapestRental();
+    }
 }
