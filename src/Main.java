@@ -120,7 +120,6 @@ public class Main extends JFrame {
             } catch (InterruptedException e) {
 
             }
-            printResult();
         }).start();
     }
 
@@ -175,28 +174,6 @@ public class Main extends JFrame {
         } catch (SQLException e) {
             e.printStackTrace();
             appendToTextArea("Error initializing the database: " + e.getMessage() + "\n");
-        }
-    }
-
-    private void printResult() {
-        String DB_URL = Database.getURL();
-        String USER = Database.getUSER();
-        String PASS = Database.getPASS();
-        Connection conn;
-        try {
-            conn = DriverManager.getConnection(DB_URL, USER, PASS);
-            Statement stmt = conn.createStatement();
-            String sql;
-            sql = "select * from rental";
-            ResultSet rs = stmt.executeQuery(sql);
-            int cnt = 0;
-            while (rs.next())
-                cnt++;
-            appendToTextArea("Total rentals: " + cnt + "\n");
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-            appendToTextArea("Error printing the results: " + e.getMessage() + "\n");
         }
     }
 
