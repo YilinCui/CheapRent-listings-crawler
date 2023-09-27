@@ -9,9 +9,22 @@ public class Database {
 	private Statement statement = null;
     private PreparedStatement preparedStatement = null;
     private ResultSet resultSet = null;
-	private static String URL = "jdbc:mysql://localhost:3306/javaFinal";
-	private static String USER = "javaUser";
-	private static String PASS = "java";
+	private static String URL = "jdbc:mysql://localhost:3306/apartmentDB";
+	private static String USER = "root";
+	private static String PASS = "1234";
+
+	public static String getURL() {
+		return URL;
+	}
+
+	public static String getUSER() {
+		return USER;
+	}
+
+	public static String getPASS() {
+		return PASS;
+	}
+
 	private static BasicDataSource dataSource = null;
 	static {
 		dataSource = new BasicDataSource();
@@ -23,21 +36,6 @@ public class Database {
 		dataSource.setMaxIdle(10);
 		dataSource.setMaxTotal(25);
 
-	}
-	
-	public static Connection getConnection() throws SQLException {
-        return dataSource.getConnection();
-    }
-	
-	public Database() {
-//		try {
-//			conn = DriverManager.getConnection(URL, USER, PASS);
-//			System.out.println("Connected database successfully!");
-//		} catch (SQLException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//			System.out.println("Connection Error!");
-//		}
 	}
 	public void insertRental(String link, String suite, int price, String location) {
 		try {
@@ -61,19 +59,9 @@ public class Database {
 			close();
 		}
 	}
-    public static void main(String[] args) {
-    	Database d = new Database();
-    	d.insertRental("http", "1b", 1450, "NYC");
-    }
     
     private void close() {
         try {
-            if (resultSet != null)
-                resultSet.close();
-            
-            if (statement != null)
-                statement.close();
-            
             if (preparedStatement != null)
             	preparedStatement.close();
             
@@ -85,7 +73,3 @@ public class Database {
         }
     }
 }
-
-// create database javaFinal;
-// CREATE USER 'javaUser'@'localhost' IDENTIFIED WITH authentication_plugin BY 'java';
-// GRANT ALL PRIVILEGES ON javaFinal.* TO 'javaUser'@'localhost';

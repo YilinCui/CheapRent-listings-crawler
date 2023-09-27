@@ -42,12 +42,7 @@ public class Main extends JFrame {
         textArea.append("Click the Button to start");
         // Create the JButton
         button = new JButton("Start Crawling");
-        button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                startCrawling();
-            }
-        });
+        button.addActionListener(e -> startCrawling());
         add(button, BorderLayout.SOUTH);
 
         // Show the JFrame
@@ -82,11 +77,16 @@ public class Main extends JFrame {
 //        area = "flushing-ny";
 //        createTasks(baseURL + area, area, pageNum);
 ////      548
-//		
-	    pageNum = 28;
-	    area = "jersey-city-nj";
-	    createTasks(baseURL + area, area, pageNum);
+//
+//	    pageNum = 28;
+//	    area = "jersey-city-nj";
+//	    createTasks(baseURL + area, area, pageNum);
 //	    1592
+
+        pageNum = 28;
+        area = "irvine-ca";
+        createTasks(baseURL + area, area, pageNum);
+
 //	      
 //	    pageNum = 8;
 //	    area = "hoboken-nj";
@@ -109,57 +109,47 @@ public class Main extends JFrame {
 ////	    2566
 
         // Start crawling in a separate thread to avoid blocking the Event Dispatch Thread
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                ExecutorService pool = Executors.newFixedThreadPool(MAX_T);
-                for (Runnable task : tasks)
-                    pool.execute(task);
+        new Thread(() -> {
+            ExecutorService pool = Executors.newFixedThreadPool(MAX_T);
+            for (Runnable task : tasks)
+                pool.execute(task);
 
-                pool.shutdown();
+            pool.shutdown();
 
-                try {
-                    pool.awaitTermination(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
-                } catch (InterruptedException e) {
+            try {
+                pool.awaitTermination(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
+            } catch (InterruptedException e) {
 
-                }
-                printResult();
             }
+            printResult();
         }).start();
     }
 
 
     public static void main(String[] args) {
-//        SwingUtilities.invokeLater(new Runnable() {
-//            @Override
-//            public void run() {
-//                new Main();
-//            }
-//        });
     	new Main();
     }
 
     private void createTasks(String url, String area, int pageNum) {
         url = url + "/";
         for (int i = 1; i <= pageNum; i++) {
-            WebCrawler r = new WebCrawler(url + String.valueOf(i), i, area, textArea);
+            WebCrawler r = new WebCrawler(url + i, i, area, textArea);
             tasks.add(r);
         }
     }
 
     private void initDB() {
-        String DB_URL = "jdbc:mysql://localhost:3306/";
-        String USER = "javaUser";
-        String PASS = "java";
+        String DB_URL = Database.getURL();
+        String USER = Database.getUSER();
+        String PASS = Database.getPASS();
         Connection conn;
         try {
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
             Statement stmt = conn.createStatement();
-            String sql = "CREATE DATABASE IF NOT EXISTS javaFinal";
+            String sql = "CREATE DATABASE IF NOT EXISTS apartmentDB";
             stmt.executeUpdate(sql);
             appendToTextArea("Database created successfully!\n");
 
-            DB_URL = "jdbc:mysql://localhost:3306/javaFinal";
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
             stmt = conn.createStatement();
 
@@ -184,22 +174,19 @@ public class Main extends JFrame {
             appendToTextArea("Initialized successfully!\n");
 
         } catch (SQLException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
             appendToTextArea("Error initializing the database: " + e.getMessage() + "\n");
         }
     }
 
     private void printResult() {
-        String DB_URL = "jdbc:mysql://localhost:3306/";
-        String USER = "javaUser";
-        String PASS = "java";
+        String DB_URL = Database.getURL();
+        String USER = Database.getUSER();
+        String PASS = Database.getPASS();
         Connection conn;
         try {
-            DB_URL = "jdbc:mysql://localhost:3306/javaFinal";
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
             Statement stmt = conn.createStatement();
-            stmt = conn.createStatement();
             String sql;
             sql = "select * from rental";
             ResultSet rs = stmt.executeQuery(sql);
@@ -209,19 +196,13 @@ public class Main extends JFrame {
             appendToTextArea("Total rentals: " + cnt + "\n");
 
         } catch (SQLException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
             appendToTextArea("Error printing the results: " + e.getMessage() + "\n");
         }
     }
 
     private void appendToTextArea(String text) {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                textArea.append(text);
-            }
-        });
+        SwingUtilities.invokeLater(() -> textArea.append(text));
     }
 }
 

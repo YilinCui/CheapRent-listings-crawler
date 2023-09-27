@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="Multithread_WebCrawler">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/Multithread_WebCrawler.zip!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

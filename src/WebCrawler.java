@@ -37,15 +37,12 @@ public class WebCrawler implements Runnable {
         user_agents_list.add("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.83 Safari/537.36");
         user_agents_list.add("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.51 Safari/537.36");
         user_agents_list.add("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/33.0.1750.152 Safari/537.36");
-        
-//        thread = new Thread(this);
-//        thread.start();
+
     }
     @Override
     public void run() {
     	textarea.append("Web Crawler Created! \n");
         crawl(1, first_link, false);
-        textarea.append("Web Crawler Complete \n");
     }
 
     private void crawl(int level, String url, boolean isTarget) {
@@ -59,7 +56,6 @@ public class WebCrawler implements Runnable {
             	
             	if (isTarget && level == MAX_DEPTH) {
             		textarea.append(url+ "\n");
-//            		
             		selector = "#descriptionSection > h2";
             		String title = doc.select(selector).text();
             		if (title.equals("About This Property")) {
@@ -162,9 +158,7 @@ public class WebCrawler implements Runnable {
 		
 		if (numBed + numBath > 0)
     		suiteType = numBed + "B" + numBath + "B";
-		
-//		textarea.append(suiteType);
-//		textarea.append(rentalPrice);
+
 		// insert to database
 		if (suiteType.length() > 0 && rentalPrice != 0) {
     		db.insertRental(url, suiteType, rentalPrice, this.location);
@@ -229,8 +223,6 @@ public class WebCrawler implements Runnable {
         	int max = user_agents_list.size() - 1, min = 0;
         	int rid = rn.nextInt(max - min + 1) + min;
             Connection conn = Jsoup.connect(url).header("Content-Type","application/x-www-form-urlencoded")
-//            		.header("Accept", "*/*")
-//            		.referrer("http://www.google.com");
             		.userAgent(user_agents_list.get(rid));
             
             Document doc = conn.get();
@@ -244,9 +236,5 @@ public class WebCrawler implements Runnable {
         	System.out.println(e);
             return null;
         }
-    }
-
-    public Thread getThread() {
-        return thread;
     }
 }
