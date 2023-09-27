@@ -16,7 +16,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class Main extends JFrame {
-    private static final long serialVersionUID = 1L;
     private JTextField textField;
     private JTextArea textArea;
     private JButton button;
