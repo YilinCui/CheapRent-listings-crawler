@@ -16,6 +16,9 @@ public class RentalController {
     @Autowired
     private RentalService rentalService;
 
+    @Autowired
+    private DatabaseService databaseService;
+
     @GetMapping("/{id}")
     public Rental getRentalById(@PathVariable Integer id) {
         return rentalService.getRentalById(id);
@@ -29,5 +32,22 @@ public class RentalController {
     @GetMapping("/cheapest")
     public Rental getCheapestRental() {
         return rentalService.getCheapestRental();
+    }
+
+    @GetMapping("/asc")
+    public List<Rental> getAllRentalAsc() {
+        return rentalService.getAllRentalsAsc();
+    }
+
+    @GetMapping("/desc")
+    public List<Rental> getAllRentalDesc() {
+        return rentalService.getAllRentalsDesc();
+    }
+
+    @GetMapping("/start")
+    public void startCrawling(){
+        databaseService.dropTable();
+        databaseService.createTable();
+        rentalService.startCrawling("https://www.apartments.com/");
     }
 }
