@@ -1,5 +1,6 @@
-package com.example.backend;
+package com.example.backend.ServiceLayer;
 
+import com.example.backend.PersistanceLayer.DatabaseInitializer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

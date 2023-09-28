@@ -1,6 +1,8 @@
-package com.example.backend;
+package com.example.backend.ServiceLayer;
 
-import com.example.backend.Entity.*;
+import com.example.backend.Entity.Rental;
+import com.example.backend.PersistanceLayer.RentalRepository;
+import com.example.backend.ApplicationLayer.WebCrawler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -10,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-
+import java.util.concurrent.TimeUnit;
 @Service
 public class RentalService {
 
@@ -75,6 +77,17 @@ public class RentalService {
 
         pool.shutdown();
 
+        try {
+            // 等待线程池在5秒内关闭
+            if (!pool.awaitTermination(5, TimeUnit.SECONDS)) {
+                // 超过5秒，强制关闭线程池
+                pool.shutdownNow();
+            }
+        } catch (InterruptedException e) {
+            // 如果等待过程中发生中断，也强制关闭线程池
+            pool.shutdownNow();
+            Thread.currentThread().interrupt(); // 保留中断状态
+        }
     }
 
     private void createTasks(String url, String area, int pageNum) {

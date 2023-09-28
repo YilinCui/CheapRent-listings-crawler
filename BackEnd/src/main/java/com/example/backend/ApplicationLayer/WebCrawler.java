@@ -1,4 +1,4 @@
-package com.example.backend;
+package com.example.backend.ApplicationLayer;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -6,12 +6,12 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
+import com.example.backend.ServiceLayer.RentalService;
 import org.jsoup.Jsoup;
 import org.jsoup.Connection;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import org.springframework.stereotype.Service;
 
 public class WebCrawler implements Runnable {
     private static final int MAX_DEPTH = 2;

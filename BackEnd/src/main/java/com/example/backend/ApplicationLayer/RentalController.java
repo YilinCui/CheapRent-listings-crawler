@@ -1,6 +1,8 @@
-package com.example.backend;
+package com.example.backend.ApplicationLayer;
 
 import com.example.backend.Entity.Rental;
+import com.example.backend.ServiceLayer.DatabaseService;
+import com.example.backend.ServiceLayer.RentalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
