@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface RentalRepository extends JpaRepository<Rental, Integer> {
-    @Query("SELECT r FROM Rental r WHERE r.suite != '1b1b' ORDER BY r.price ASC ")
+    @Query("SELECT r FROM Rental r ORDER BY r.price ASC ")
     List<Rental> findAllByOrderByPriceAsc(Pageable pageable);
 
 //    @Query(value = "SELECT * FROM Rental r WHERE r.suite != '1b1b' ORDER BY r.price DESC LIMIT 5", nativeQuery = true)

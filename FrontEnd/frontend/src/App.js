@@ -1,20 +1,17 @@
-import React, { useState } from 'react'; // Import useState hook
+import React, { useState } from 'react';
+import Button from './Component/Button';
+import TextArea from './Component/TextArea'; 
 import './App.css';
 
 function App() {
-  // Initialize state to hold the fetched data
   const [fetchedData, setFetchedData] = useState(null);
 
-  // Define the function that will handle the button click
-  const handleClick = async () => {
+  const handleClick = async (apiEndpoint) => {
     try {
-      // Make an HTTP GET request to your backend
-      const response = await fetch('http://localhost:8080/rental/');
+      const response = await fetch(`http://localhost:8080/rental/${apiEndpoint}`);
       if (response.ok) {
         const data = await response.json();
         console.log('Success:', data);
-
-        // Set the fetched data into state
         setFetchedData(data);
       } else {
         console.log('HTTP-Error:', response.status);
@@ -24,23 +21,27 @@ function App() {
     }
   };
 
+
   return (
     <div className="App">
       <header className="App-header">
-        <p>Hello, World!</p>
-        {/* Attach the handleClick function to the button's onClick event */}
-        <button onClick={handleClick}>Click Me!</button>
-
-        {/* Display the fetched data */}
-        {fetchedData && (
-          <div className="data-container">
-            <h2>Fetched Data:</h2>
-            <pre>{JSON.stringify(fetchedData, null, 2)}</pre>
+        <div className="button-container">
+          <button onClick={() => handleClick('start')}>Start Crawling</button>
+          <div className="middle-buttons">
+            <button onClick={() => handleClick('')}>All of the Data</button>
+            <button onClick={() => handleClick('cheapest')}>Cheapest Rent</button>
+            <button onClick={() => handleClick('asc')}>in ASC order</button>
+            <button onClick={() => handleClick('desc')}>in DESC order</button>
           </div>
-        )}
+        </div>
+        <div className="textarea-container">
+          <textarea readOnly value={fetchedData ? JSON.stringify(fetchedData, null, 2) : ''} />
+        </div>
       </header>
     </div>
   );
+
+
 }
 
 export default App;
