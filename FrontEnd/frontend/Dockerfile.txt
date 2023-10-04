@@ -1,0 +1,29 @@
+# 使用Node作为基础镜像
+FROM node:14
+
+# 在容器中创建一个目录，用来存放app代码
+WORKDIR /app
+
+# 将package.json和package-lock.json拷贝到工作目录
+COPY package*.json ./
+
+# 安装依赖
+RUN npm install
+
+# 拷贝其他源代码到工作目录
+COPY . .
+
+# 编译React项目（这里你也可以运行其他命令，比如npm run build）
+RUN npm run build
+
+# 使用nginx作为生产环境的web服务器
+FROM nginx:alpine
+
+# 将React编译产物从构建阶段拷贝到nginx中用于部署
+COPY --from=0 /app/build /usr/share/nginx/html
+
+# 暴露端口80
+EXPOSE 80
+
+# 启动nginx
+CMD ["nginx", "-g", "daemon off;"]

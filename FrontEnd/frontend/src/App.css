@@ -17,6 +17,21 @@
 }
 
 textarea {
-  width: 80%;
+  width: 200%;
   height: 1200px;
+  opacity: 0.5;
+}
+.App {
+  background-color: black;
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  background-position: center center;
+  background-repeat: no-repeat;
+  
+  background-size: auto;
+  
+  background-image: url('/public/logo512.png');
 }

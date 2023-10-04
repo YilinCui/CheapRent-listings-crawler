@@ -8,7 +8,7 @@ function App() {
 
   const handleClick = async (apiEndpoint) => {
     try {
-      const response = await fetch(`http://localhost:8080/rental/${apiEndpoint}`);
+      const response = await fetch(`http://192.168.20.116:8080/rental/${apiEndpoint}`);
       if (response.ok) {
         const data = await response.json();
         console.log('Success:', data);
