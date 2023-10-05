@@ -7,7 +7,7 @@ In the Main branch, the project is implemented using native Java. For database c
 # Full-Stack Branch
 On the other hand, the Full-Stack branch is a complete rewrite of the project using modern frameworks and libraries. The backend is built using Spring Boot, which provides a robust and scalable framework for server-side development. For Object-Relational Mapping (ORM), Hibernate is used, making data manipulation more abstract and easier to manage.
 
-The frontend is developed using Vue.js, a progressive JavaScript framework for building user interfaces. This allows for a more dynamic and interactive UI.
+The frontend is developed using React.js, a progressive JavaScript framework for building user interfaces. This allows for a more dynamic and interactive UI.
 
 Architecturally, the project adopts a three-tier structure comprising the Persistence Layer, Business Logic Layer, and Presentation Layer. The Persistence Layer handles the database operations, the Business Logic Layer contains the core functionalities, and the Presentation Layer is responsible for interacting with the users.
 
