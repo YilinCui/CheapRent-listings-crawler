@@ -32,6 +32,7 @@ function App() {
             <button onClick={() => handleClick('cheapest')}>Cheapest Rent</button>
             <button onClick={() => handleClick('asc')}>in ASC order</button>
             <button onClick={() => handleClick('desc')}>in DESC order</button>
+            <button onClick={() => handleClick('studio')}>Search for studio</button>
           </div>
         </div>
         <div className="textarea-container">

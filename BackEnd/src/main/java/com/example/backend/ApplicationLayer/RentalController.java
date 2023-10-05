@@ -44,6 +44,10 @@ public class RentalController {
         return rentalService.getAllRentalsDesc();
     }
 
+    @GetMapping("/studio")
+    public List<Rental> getStudioDesc() {
+        return rentalService.getStudioDesc();
+    }
     @GetMapping("/start")
     public void startCrawling(){
         databaseService.dropTable();
