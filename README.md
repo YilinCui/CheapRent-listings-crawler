@@ -1,5 +1,13 @@
-# CheapRent--The webcrawler that helps you find the best apartment!
-This is a Full-Stack WebCrawler Project used to craw cheap house-renting according to given housing website
+# CheapRent: The webcrawler that helps you find the best apartment!
+This is a Full-Stack WebCrawler Project used to craw cheap house-renting according to given housing website.
+
+# Tech Stack:
+Front-End: React
+BackEnd: SpringBoot
+DataBase: Hibernate+JPA+JDBC
+CI/CD: Docker+TeamCity
+Server: Alibaba Cloud
+Operating System: Windows + Linux
 
 # Main Branch
 In the Main branch, the project is implemented using native Java. For database connectivity, it uses JDBC (Java Database Connectivity). The user interface is designed using Java Swing. Essentially, this branch represents a more traditional Java application that directly interacts with the database and uses desktop GUI for user interactions.
