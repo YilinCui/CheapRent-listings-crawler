@@ -16,7 +16,8 @@ COPY . .
 # 暴露容器的3000端口
 EXPOSE 3000
 
-# 运行React项目
-CMD ["npm", "start"]
-
+# 设置为生产环境
 ENV NODE_ENV=production
+
+# 启动命令
+CMD ["npm", "start"]
