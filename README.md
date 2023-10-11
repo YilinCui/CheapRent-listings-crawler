@@ -1,10 +1,17 @@
 # CheapRent: The webcrawler that helps you find the best apartment!
 This is a Full-Stack WebCrawler Project used to craw cheap house-renting according to given housing website.
+The link to the website of the project: http://cheaprent.top/
+
+# Tech Stack
+Front-End: React.js
+Back-End: SpringBoot + Hibernate + JPA
+Container: Docker
+Cloud: Tencent Cloud Server
 
 # Full-Stack Branch 
 The Full-Stack branch is a complete rewrite of the project using modern frameworks and libraries. The backend is built using Spring Boot, which provides a robust and scalable framework for server-side development. For Object-Relational Mapping (ORM), Hibernate is used, making data manipulation more abstract and easier to manage.
 
-The frontend is developed using Vue.js, a progressive JavaScript framework for building user interfaces. This allows for a more dynamic and interactive UI.
+The frontend is developed using React.js, a progressive JavaScript framework for building user interfaces. This allows for a more dynamic and interactive UI.
 
 Architecturally, the project adopts a three-tier structure comprising the Persistence Layer, Business Logic Layer, and Presentation Layer. The Persistence Layer handles the database operations, the Business Logic Layer contains the core functionalities, and the Presentation Layer is responsible for interacting with the users.
 
