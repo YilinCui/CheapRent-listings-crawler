@@ -10,7 +10,17 @@ function App() {
   const handleClick = async (apiEndpoint) => {
     console.log("NODE_ENV:", process.env.NODE_ENV);
     try {
-      const response = await fetch(`${apiIP}${apiEndpoint}`);
+      console.log(`${apiEndpoint}`);
+      console.log(`/rental/${apiEndpoint}`);
+      // const response = await fetch(`${apiIP}${apiEndpoint}`);
+      const response = await fetch(`/rental/${apiEndpoint}`, {
+        method: 'GET', 
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+      });
+      
       if (response.ok) {
         const data = await response.json();
         console.log('Success:', data);
