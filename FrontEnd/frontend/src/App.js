@@ -2,13 +2,25 @@ import React, { useState } from 'react';
 import Button from './Component/Button';
 import TextArea from './Component/TextArea'; 
 import './App.css';
+import { apiIP } from './Configuration/config';
 
 function App() {
   const [fetchedData, setFetchedData] = useState(null);
 
   const handleClick = async (apiEndpoint) => {
+    console.log("NODE_ENV:", process.env.NODE_ENV);
     try {
-      const response = await fetch(`http://192.168.20.116:8080/rental/${apiEndpoint}`);
+      console.log(`${apiEndpoint}`);
+      console.log(`/rental/${apiEndpoint}`);
+      // const response = await fetch(`${apiIP}${apiEndpoint}`);
+      const response = await fetch(`/rental/${apiEndpoint}`, {
+        method: 'GET', 
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+      });
+      
       if (response.ok) {
         const data = await response.json();
         console.log('Success:', data);
@@ -32,6 +44,7 @@ function App() {
             <button onClick={() => handleClick('cheapest')}>Cheapest Rent</button>
             <button onClick={() => handleClick('asc')}>in ASC order</button>
             <button onClick={() => handleClick('desc')}>in DESC order</button>
+            <button onClick={() => handleClick('studio')}>Search for studio</button>
           </div>
         </div>
         <div className="textarea-container">

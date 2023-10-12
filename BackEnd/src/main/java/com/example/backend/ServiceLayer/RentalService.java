@@ -35,6 +35,9 @@ public class RentalService {
     public List<Rental> getAllRentalsDesc() {
         return rentalRepository.findAllByOrderByPriceDesc();
     }
+    public List<Rental> getStudioDesc() {
+        return rentalRepository.findStudioDesc();
+    }
 
     public Rental createOrUpdateRental(Rental rental) {
         return rentalRepository.save(rental);

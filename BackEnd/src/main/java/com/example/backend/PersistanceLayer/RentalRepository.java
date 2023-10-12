@@ -11,8 +11,8 @@ public interface RentalRepository extends JpaRepository<Rental, Integer> {
     @Query("SELECT r FROM Rental r ORDER BY r.price ASC ")
     List<Rental> findAllByOrderByPriceAsc(Pageable pageable);
 
-//    @Query(value = "SELECT * FROM Rental r WHERE r.suite != '1b1b' ORDER BY r.price DESC LIMIT 5", nativeQuery = true)
-//    List<Rental> findTop5ByCustomCriteria();
+    @Query(value = "select * from Rental where suite = 'studio' order by price desc", nativeQuery = true)
+    List<Rental> findStudioDesc();
 
     List<Rental> findAllByOrderByPriceAsc();
 

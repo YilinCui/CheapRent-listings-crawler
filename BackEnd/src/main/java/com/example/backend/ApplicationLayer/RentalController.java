@@ -8,7 +8,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:3000")
+//@CrossOrigin(origins = "http://${REACT_HOST:192.168.20.116}:3000")
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/rental")
 public class RentalController {
@@ -44,6 +45,10 @@ public class RentalController {
         return rentalService.getAllRentalsDesc();
     }
 
+    @GetMapping("/studio")
+    public List<Rental> getStudioDesc() {
+        return rentalService.getStudioDesc();
+    }
     @GetMapping("/start")
     public void startCrawling(){
         databaseService.dropTable();
