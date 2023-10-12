@@ -7,6 +7,12 @@ Front-End: React.js
 Back-End: SpringBoot + Hibernate + JPA
 Container: Docker
 Cloud: Tencent Cloud Server
+CI/CD: bash scripts + Jenkins(future feature)
+
+# How to run my program on your machine
+1. install docker
+2. run the bash scripts to build docker images for React/MySQL/SpringBoot
+3. run the RUN!!!!.bat to start your journey.
 
 # Full-Stack Branch 
 The Full-Stack branch is a complete rewrite of the project using modern frameworks and libraries. The backend is built using Spring Boot, which provides a robust and scalable framework for server-side development. For Object-Relational Mapping (ORM), Hibernate is used, making data manipulation more abstract and easier to manage.
