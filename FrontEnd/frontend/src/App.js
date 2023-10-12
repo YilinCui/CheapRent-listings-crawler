@@ -2,13 +2,15 @@ import React, { useState } from 'react';
 import Button from './Component/Button';
 import TextArea from './Component/TextArea'; 
 import './App.css';
+import { apiIP } from './Configuration/config';
 
 function App() {
   const [fetchedData, setFetchedData] = useState(null);
 
   const handleClick = async (apiEndpoint) => {
+    console.log("NODE_ENV:", process.env.NODE_ENV);
     try {
-      const response = await fetch(`http://192.168.20.116:8080/rental/${apiEndpoint}`);
+      const response = await fetch(`${apiIP}${apiEndpoint}`);
       if (response.ok) {
         const data = await response.json();
         console.log('Success:', data);

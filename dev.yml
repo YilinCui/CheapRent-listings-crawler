@@ -2,7 +2,7 @@ version: '3.1'
 
 services:
   mysql:
-    image: yilinnyu/mysql
+    image: yilinnyu/project:mysql
     container_name: mysql-container
     environment:
       MYSQL_ROOT_PASSWORD: 1234
@@ -12,8 +12,18 @@ services:
     networks:
       - docker_network
 
+
+  react:
+    image: yilinnyu/project:react
+    container_name: react-container
+    ports:
+      - "3000:3000"
+    networks:
+      - docker_network
+
   springboot:
-    image: yilinnyu/springboot
+    image: yilinnyu/project:springboot
+    container_name: springboot-container
     depends_on:
       - mysql
     environment:
@@ -21,6 +31,7 @@ services:
       - DB_PORT=3306
       - DB_USERNAME=root
       - DB_PASSWORD=1234
+      - REACT_HOST=react-container
     ports:
       - "8080:8080"
     networks:
