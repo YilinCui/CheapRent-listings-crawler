@@ -4,8 +4,9 @@ import com.example.backend.Entity.Rental;
 import com.example.backend.ServiceLayer.DatabaseService;
 import com.example.backend.ServiceLayer.RentalService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-
+import org.springframework.http.ResponseEntity;
 import java.util.List;
 
 //@CrossOrigin(origins = "http://${REACT_HOST:192.168.20.116}:3000")
@@ -55,4 +56,11 @@ public class RentalController {
         databaseService.createTable();
         rentalService.startCrawling("https://www.apartments.com/");
     }
+
+    @RequestMapping("/error")
+    public ResponseEntity<Rental> handleError() {
+        Rental rental = new Rental();
+        return new ResponseEntity<>(rental, HttpStatus.OK);
+    }
+
 }
